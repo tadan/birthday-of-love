@@ -22,11 +22,13 @@ ENV=${1:-production}
 if [ "$ENV" = "staging" ]; then
     BRANCH="staging"
     NAS_REPO_PATH="/volume1/docker/birthday-of-love-staging"
+    NAS_BUILD_PATH="/volume1/docker/birthday-of-love-staging/build"
     DOMAIN="staging.begga.daniele.is"
     echo -e "${YELLOW}🚀 Deploying to STAGING${NC}"
 elif [ "$ENV" = "production" ]; then
     BRANCH="main"
     NAS_REPO_PATH="/volume1/docker/birthday-of-love-prod"
+    NAS_BUILD_PATH="/volume1/docker/birthday-of-love-prod/build"
     DOMAIN="begga.daniele.is"
     echo -e "${GREEN}🚀 Deploying to PRODUCTION${NC}"
 else

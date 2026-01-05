@@ -50,7 +50,7 @@ sudo npm install
 sudo npm run build
 
 # Create symlink for nginx
-sudo ln -s /volume1/docker/birthday-of-love-prod/dist /volume1/docker/begga.daniele.is
+sudo ln -s /volume1/docker/birthday-of-love-prod/build /volume1/docker/begga.daniele.is
 ```
 
 ### 3. Set Up Staging Environment
@@ -66,7 +66,7 @@ sudo npm install
 sudo npm run build
 
 # Create symlink for nginx
-sudo ln -s /volume1/docker/birthday-of-love-staging/dist /volume1/docker/staging.begga.daniele.is
+sudo ln -s /volume1/docker/birthday-of-love-staging/build /volume1/docker/staging.begga.daniele.is
 ```
 
 ### 4. Configure Nginx for Staging
@@ -90,7 +90,7 @@ curl http://localhost/staging.begga.daniele.is
 ---
 
 ## ✅ Build Completed
-The production build is ready in the `dist/` directory.
+The production build is ready in the `build/` directory.
 
 ## Option 1: Deploy via Cloudflare Tunnel (Recommended)
 
