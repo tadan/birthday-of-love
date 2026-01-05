@@ -1,0 +1,23 @@
+# Cloudflare Tunnel Configuration Example
+# Copy this to your NAS at: ~/.cloudflared/config.yml
+
+tunnel: YOUR_TUNNEL_ID_HERE
+credentials-file: /path/to/your/credentials.json
+
+ingress:
+  # Wedding website subdomain
+  - hostname: begga.daniele.is
+    service: http://localhost:8080
+    originRequest:
+      noTLSVerify: true
+
+  # Your other subdomains/services...
+  # - hostname: example.daniele.is
+  #   service: http://localhost:3000
+
+  # Catch-all rule (MUST be last)
+  - service: http_status:404
+
+# Optional: Logging configuration
+# logfile: /var/log/cloudflared.log
+# loglevel: info
