@@ -1,5 +1,6 @@
 import imgFlowerDisco from 'figma:asset/d21d4748e2c1c1b39d896cb6702f42ec05bce613.png'
 import { downloadCalendarEvent } from '../utils/calendar'
+import { RSVPButton } from './RSVPButton'
 
 export function SaveTheDate() {
     return (
@@ -27,14 +28,22 @@ export function SaveTheDate() {
                     plenty of food, music, and dancing throughout the day
                     and into the evening.
                   </p>
-                  {/* Calendar button */}
-                  <button
-                    onClick={downloadCalendarEvent}
-                    style={{ fontFamily: 'Gyst, Georgia, serif' }}
-                    className='inline-block mt-8 px-8 py-3 bg-[#d8400f] text-[#f2ebd5] font-bold text-[20px]'
-                  >
-                    Add to Your Calendar
-                  </button>
+
+                  {/* RSVP button (hidden after submission) */}
+                  <div className='mt-8'>
+                    <RSVPButton />
+                  </div>
+
+                  {/* Calendar link */}
+                  <div className='mt-4'>
+                    <button
+                      onClick={downloadCalendarEvent}
+                      style={{ fontFamily: 'Times New Roman, Times, serif', cursor: 'pointer' }}
+                      className='text-[#d8400f] text-[18px] underline hover:no-underline bg-transparent border-none'
+                    >
+                      Save the event in your calendar
+                    </button>
+                  </div>
                 </div>
             </div>
         </section>
