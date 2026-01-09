@@ -919,3 +919,21 @@ html {
   syntax: "*";
   inherits: false
 }
+
+/* Custom spacing utility */
+.space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+/* Custom radio button styling */
+.radio-custom {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  outline: none;
+}
+
+.radio-custom:focus {
+  outline: none;
+  box-shadow: none;
+}
