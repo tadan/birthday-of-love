@@ -96,7 +96,7 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
         } catch (err) {
             console.error('RSVP submission error:', err)
             setError(
-                'Unable to submit RSVP. Please email us directly at wedding@daniele.is'
+                'Unable to submit RSVP. Please email us directly at wedding@daniele.is',
             )
         } finally {
             setIsSubmitting(false)
@@ -134,7 +134,9 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                         {...register('name', { required: 'Name is required' })}
                         style={{
                             backgroundColor: 'white',
-                            paddingLeft: '.25rem',
+                            paddingLeft: '1rem',
+                            paddingTop: '.5rem',
+                            paddingBottom: '.5rem',
                             fontSize: '1.2rem',
                         }}
                         className='w-full bg-white h-12 text-base px-3 rounded'
@@ -176,7 +178,9 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                         })}
                         style={{
                             backgroundColor: 'white',
-                            paddingLeft: '.25rem',
+                            paddingLeft: '1rem',
+                            paddingTop: '.5rem',
+                            paddingBottom: '.5rem',
                             fontSize: '1.2rem',
                         }}
                         className='w-full px-3'
@@ -426,7 +430,9 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                                 {...register('foodAllergies')}
                                 style={{
                                     backgroundColor: 'white',
-                                    paddingLeft: '.25rem',
+                                    paddingLeft: '1rem',
+                                    paddingTop: '.5rem',
+                                    paddingBottom: '.5rem',
                                     fontSize: '1.2rem',
                                 }}
                                 className='w-full h-12 text-base px-3 rounded'
@@ -456,7 +462,9 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                                 })}
                                 style={{
                                     backgroundColor: 'white',
-                                    paddingLeft: '.25rem',
+                                    paddingLeft: '1rem',
+                                    paddingTop: '.5rem',
+                                    paddingBottom: '.5rem',
                                     fontSize: '1.2rem',
                                 }}
                                 className='w-full h-12'
@@ -509,7 +517,9 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                                 })}
                                 style={{
                                     backgroundColor: 'white',
-                                    paddingLeft: '.25rem',
+                                    paddingLeft: '1rem',
+                                    paddingTop: '.5rem',
+                                    paddingBottom: '.5rem',
                                     fontSize: '1.2rem',
                                 }}
                                 className='w-full bg-white text-base p-3 rounded min-h-[100px]'
@@ -549,7 +559,9 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                                 {...register('notes')}
                                 style={{
                                     backgroundColor: 'white',
-                                    paddingLeft: '.25rem',
+                                    paddingLeft: '1rem',
+                                    paddingTop: '.5rem',
+                                    paddingBottom: '.5rem',
                                     fontSize: '1.2rem',
                                 }}
                                 className='w-full bg-white text-base p-3 rounded min-h-[100px]'
