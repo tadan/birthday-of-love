@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "figma": {
+      "command": "figma-mcp",
+      "args": [],
+      "env": {
+        "FIGMA_PERSONAL_ACCESS_TOKEN": "figd_IqmUJxmKPmaJGvpD5lFIaQGokuDI8sHK6esxIozI"
+      }
+    }
+  }
+}
