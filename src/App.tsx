@@ -1,6 +1,7 @@
 import { Hero } from "./components/Hero";
 import { SaveTheDate } from "./components/SaveTheDate";
 import { Location } from "./components/Location";
+import { TravelSuggestions } from "./components/TravelSuggestions";
 import { Footer } from "./components/Footer";
 import { PhotoDecoration } from "./components/PhotoDecoration";
 
@@ -22,6 +23,7 @@ export default function App() {
       </div>
       
       <Location />
+      <TravelSuggestions />
       <Footer />
     </div>
   );

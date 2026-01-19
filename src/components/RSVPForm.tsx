@@ -18,11 +18,12 @@ interface RSVPFormData {
 
 interface RSVPFormProps {
     onSubmit: (result: { success: boolean; isAttending: boolean }) => void
+    onClose: () => void
 }
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgknvop'
 
-export function RSVPForm({ onSubmit }: RSVPFormProps) {
+export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [attending, setAttending] = useState<'yes' | 'no'>('yes')
@@ -125,7 +126,7 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                         }}
                         className='block text-left'
                     >
-                        Name
+                        Name*
                     </label>
                     <input
                         id='name'
@@ -167,7 +168,7 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                             fontSize: '1.5rem',
                         }}
                     >
-                        Surname
+                        Surname*
                     </label>
                     <input
                         id='surname'
@@ -284,7 +285,7 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                                 }}
                                 className='block text-left text-black text-lg mb-3'
                             >
-                                Food preference
+                                Food preference*
                             </label>
                             <div className='space-y-2'>
                                 <div className='flex items-center'>
@@ -451,7 +452,7 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                                 }}
                                 className='block text-left text-black text-lg mb-2'
                             >
-                                Your address
+                                Your address*
                             </label>
                             <input
                                 id='address'
@@ -495,7 +496,7 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                                     fontSize: '1.5rem',
                                 }}
                             >
-                                Will you bring a guest?
+                                Will you bring a guest?*
                             </label>
                             <p
                                 style={{
@@ -510,7 +511,7 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                             </p>
                             <textarea
                                 id='guests'
-                                placeholder='Full names of those attending with you. or write none if you are coming alone'
+                                placeholder='Full names of those attending with you, otherwise write my kind self'
                                 {...register('guests', {
                                     required:
                                         'Please list who will attend with you',
@@ -597,10 +598,47 @@ export function RSVPForm({ onSubmit }: RSVPFormProps) {
                         color: 'white',
                         cursor: isSubmitting ? 'not-allowed' : 'pointer',
                     }}
+                    onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor = '#b83510')
+                    }
+                    onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor = '#d8400f')
+                    }
                     className='w-full py-3 bg-[#d8400f] text-white font-bold text-xl hover:bg-[#b83510] transition-colors disabled:opacity-50'
                 >
                     {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
+
+                {/* Submit later link */}
+                <div
+                    style={{
+                        textAlign: 'center',
+                        marginTop: '1rem',
+                    }}
+                >
+                    <button
+                        type='button'
+                        onClick={onClose}
+                        style={{
+                            fontFamily: 'Times New Roman, Times, serif',
+                            color: '#0d0d0d',
+                            fontSize: '1rem',
+                            textDecoration: 'underline',
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            padding: '0',
+                        }}
+                        onMouseEnter={(e) =>
+                            (e.currentTarget.style.textDecoration = 'none')
+                        }
+                        onMouseLeave={(e) =>
+                            (e.currentTarget.style.textDecoration = 'underline')
+                        }
+                    >
+                        I will submit it later
+                    </button>
+                </div>
             </form>
         </div>
     )

@@ -41,5 +41,6 @@ Thumbs.db
 # *.jpg
 # *.jpeg
 
-# Keep reference design
-!MacBook Pro 14_ - 9.png
+# Reference design frames from Figma and MCP initialization file
+rsvp/
+.claude/mcp.json
