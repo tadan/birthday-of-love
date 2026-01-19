@@ -1,14 +1,25 @@
 import { useState, useEffect } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 
-// Placeholder images for each tab
+// Images for each tab - specific to Italian locations
 const travelImages = {
-    howToGetThere:
-        'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800',
-    whereToStay:
-        'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800',
-    whatToDo:
-        'https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=800',
+    howToGetThere: {
+        rome: 'https://wikitravel.org/upload/shared/4/44/Colosseum,_Rome.JPG',
+        pescara:
+            'https://italien.expert/wp-content/uploads/2024/09/Bahnhof-Pescara-Abruzzen-Italien-2.jpg',
+    },
+    whereToStay: {
+        village:
+            'https://viaggi.today/wp-content/uploads/elementor/thumbs/Pacentro-borghi-abruzzo-pfrhbckp8h4ejogg1ykn3wv76ypmdrdnkft8yewk8g.jpg',
+        coastline:
+            'https://abruzzo.cityrumors.it/wp-content/uploads/2017/10/img_0777.jpg',
+    },
+    whatToDo: {
+        spaghettiChitarra:
+            'https://static.cookist.it/wp-content/uploads/sites/21/2018/09/spaghetti-alla-chitarra.jpg',
+        trabocchi:
+            'https://www.majellando.it/_default_upload_bucket/image-thumb__1715__thumbnail-fullscreen-parallax_auto_ce334d53b086a8b6a73ca15df56e620b/vacanze%20sulla%20costa%20dei%20trabocchi%20in%20abruzzo.jpg',
+    },
 }
 
 export function TravelSuggestions() {
@@ -268,14 +279,24 @@ export function TravelSuggestions() {
                             {/* Images */}
                             <div className='space-y-4'>
                                 <img
-                                    src={travelImages.howToGetThere}
-                                    alt='Travel to Abruzzo'
-                                    className='w-full h-auto'
+                                    src={travelImages.howToGetThere.rome}
+                                    alt='Colosseum in Rome'
+                                    className='w-full'
+                                    style={{
+                                        aspectRatio: '16/9',
+                                        objectFit: 'cover',
+                                        height: 'auto',
+                                    }}
                                 />
                                 <img
-                                    src={travelImages.howToGetThere}
-                                    alt='Travel routes'
-                                    className='w-full h-auto'
+                                    src={travelImages.howToGetThere.pescara}
+                                    alt='City of Pescara'
+                                    className='w-full'
+                                    style={{
+                                        aspectRatio: '16/9',
+                                        objectFit: 'cover',
+                                        height: 'auto',
+                                    }}
                                 />
                             </div>
                         </div>
@@ -354,14 +375,24 @@ export function TravelSuggestions() {
 
                             <div className='space-y-4'>
                                 <img
-                                    src={travelImages.whereToStay}
-                                    alt='Accommodation options'
-                                    className='w-full h-auto'
+                                    src={travelImages.whereToStay.village}
+                                    alt='Historical Center of a Small Village in Abruzzo'
+                                    className='w-full'
+                                    style={{
+                                        aspectRatio: '16/9',
+                                        objectFit: 'cover',
+                                        height: 'auto',
+                                    }}
                                 />
                                 <img
-                                    src={travelImages.whereToStay}
-                                    alt='Where to stay'
-                                    className='w-full h-auto'
+                                    src={travelImages.whereToStay.coastline}
+                                    alt="Abruzzo's coastline"
+                                    className='w-full'
+                                    style={{
+                                        aspectRatio: '16/9',
+                                        objectFit: 'cover',
+                                        height: 'auto',
+                                    }}
                                 />
                             </div>
                         </div>
@@ -450,14 +481,26 @@ export function TravelSuggestions() {
 
                             <div className='space-y-4'>
                                 <img
-                                    src={travelImages.whatToDo}
-                                    alt='Things to do in Abruzzo'
-                                    className='w-full h-auto'
+                                    src={
+                                        travelImages.whatToDo.spaghettiChitarra
+                                    }
+                                    alt='spaghetti alla chitarra'
+                                    className='w-full'
+                                    style={{
+                                        aspectRatio: '16/9',
+                                        objectFit: 'cover',
+                                        height: 'auto',
+                                    }}
                                 />
                                 <img
-                                    src={travelImages.whatToDo}
-                                    alt='Activities'
-                                    className='w-full h-auto'
+                                    src={travelImages.whatToDo.trabocchi}
+                                    alt='trabocchi on the adriatic sea'
+                                    className='w-full'
+                                    style={{
+                                        aspectRatio: '16/9',
+                                        objectFit: 'cover',
+                                        height: 'auto',
+                                    }}
                                 />
                             </div>
                         </div>
