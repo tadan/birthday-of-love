@@ -18,7 +18,8 @@
       "Bash(git remote add:*)",
       "Skill(brainstorming)",
       "WebFetch(domain:www.figma.com)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(git rm:*)"
     ]
   }
 }
