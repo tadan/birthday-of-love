@@ -856,6 +856,18 @@
   --sidebar-accent-foreground: oklch(.205 0 0);
   --sidebar-border: oklch(.922 0 0);
   --sidebar-ring: oklch(.708 0 0);
+
+  /* Animation timing variables */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+
+  /* Natural easing curves (no bounce/elastic) */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .dark {
@@ -936,4 +948,68 @@ html {
 .radio-custom:focus {
   outline: none;
   box-shadow: none;
+}
+
+/* Form input animations */
+input[type="text"],
+input[type="email"],
+textarea {
+  transition: all var(--duration-base) var(--ease-out-quart);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(216, 64, 15, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Radio button animations */
+input[type="radio"] {
+  transition: transform var(--duration-fast) var(--ease-out-quart);
+  cursor: pointer;
+}
+
+input[type="radio"]:hover {
+  transform: scale(1.1);
+}
+
+input[type="radio"]:active {
+  transform: scale(0.95);
+}
+
+input[type="radio"]:checked {
+  animation: radio-select 0.3s var(--ease-out-expo);
+}
+
+@keyframes radio-select {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Error message animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

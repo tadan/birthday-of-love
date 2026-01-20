@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { RSVPForm } from './RSVPForm'
 import { X } from 'lucide-react'
 
@@ -14,58 +15,85 @@ interface SubmissionResult {
 
 export function RSVPModal({ isOpen, onClose }: RSVPModalProps) {
     const [submissionResult, setSubmissionResult] = useState<SubmissionResult | null>(null)
-    const [isClosing, setIsClosing] = useState(false)
 
     const handleSubmit = (result: SubmissionResult) => {
         setSubmissionResult(result)
     }
 
     const handleClose = () => {
-        setIsClosing(true)
-        setTimeout(() => {
-            onClose()
-            setSubmissionResult(null)
-            setIsClosing(false)
-        }, 250)
+        onClose()
+        // Reset submission result after animation completes
+        setTimeout(() => setSubmissionResult(null), 300)
     }
 
-    if (!isOpen && !isClosing) return null
-
     return (
-        <div
-            style={{
-                position: 'fixed',
-                inset: '0',
-                zIndex: 50,
-                backgroundColor: '#f2ebd5',
-                overflowY: 'auto',
-                opacity: isClosing ? 0 : 1,
-                transition: 'opacity 250ms'
-            }}
-        >
-            <div
-                style={{
-                    position: 'relative',
-                    minHeight: submissionResult ? 'auto' : '100vh',
-                    height: submissionResult ? '100vh' : 'auto',
-                    padding: '2rem',
-                    display: submissionResult ? 'flex' : 'block',
-                    alignItems: submissionResult ? 'center' : 'flex-start',
-                    justifyContent: submissionResult ? 'center' : 'flex-start'
-                }}
-            >
-                {!submissionResult && (
-                    <div style={{ opacity: 1, transition: 'opacity 250ms', width: '100%', maxWidth: '48rem', margin: '0 auto' }}>
-                        <RSVPForm onSubmit={handleSubmit} onClose={handleClose} />
-                    </div>
-                )}
-                {submissionResult && (
-                    <div style={{ opacity: 1, transition: 'opacity 250ms', width: '100%', maxWidth: '48rem' }}>
-                        <SuccessMessage isAttending={submissionResult.isAttending} onClose={handleClose} />
-                    </div>
-                )}
-            </div>
-        </div>
+        <AnimatePresence>
+            {isOpen && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    style={{
+                        position: 'fixed',
+                        inset: '0',
+                        zIndex: 50,
+                        backgroundColor: '#f2ebd5',
+                        overflowY: 'auto',
+                    }}
+                >
+                    <motion.div
+                        initial={{ y: 40, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: 40, opacity: 0 }}
+                        transition={{
+                            duration: 0.4,
+                            ease: [0.22, 1, 0.36, 1],
+                            delay: 0.1
+                        }}
+                        style={{
+                            position: 'relative',
+                            minHeight: submissionResult ? 'auto' : '100vh',
+                            height: submissionResult ? '100vh' : 'auto',
+                            padding: '2rem',
+                            display: submissionResult ? 'flex' : 'block',
+                            alignItems: submissionResult ? 'center' : 'flex-start',
+                            justifyContent: submissionResult ? 'center' : 'flex-start'
+                        }}
+                    >
+                        <AnimatePresence mode="wait">
+                            {!submissionResult && (
+                                <motion.div
+                                    key="form"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    style={{ width: '100%', maxWidth: '48rem', margin: '0 auto' }}
+                                >
+                                    <RSVPForm onSubmit={handleSubmit} onClose={handleClose} />
+                                </motion.div>
+                            )}
+                            {submissionResult && (
+                                <motion.div
+                                    key="success"
+                                    initial={{ scale: 0.9, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{
+                                        duration: 0.5,
+                                        ease: [0.16, 1, 0.3, 1]
+                                    }}
+                                    style={{ width: '100%', maxWidth: '48rem' }}
+                                >
+                                    <SuccessMessage isAttending={submissionResult.isAttending} onClose={handleClose} />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     )
 }
 
@@ -75,10 +103,49 @@ function SuccessMessage({ isAttending, onClose }: { isAttending: boolean; onClos
             style={{
                 maxWidth: '42rem',
                 margin: '0 auto',
-                textAlign: 'center'
+                textAlign: 'center',
+                position: 'relative'
             }}
         >
-            <h2
+            {isAttending && (
+                <>
+                    {[...Array(8)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 0, scale: 0 }}
+                            animate={{
+                                opacity: [0, 1, 0],
+                                y: [-20, -150],
+                                scale: [0, 1, 0.8],
+                                x: [0, (Math.random() - 0.5) * 100]
+                            }}
+                            transition={{
+                                duration: 2,
+                                delay: i * 0.1,
+                                ease: [0.16, 1, 0.3, 1]
+                            }}
+                            style={{
+                                position: 'absolute',
+                                left: `${20 + Math.random() * 60}%`,
+                                top: '50%',
+                                fontSize: '2rem',
+                                pointerEvents: 'none'
+                            }}
+                        >
+                            {['🎉', '✨', '💛', '🌟'][i % 4]}
+                        </motion.div>
+                    ))}
+                </>
+            )}
+
+            <motion.h2
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                    duration: 0.6,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: 0.2
+                }}
                 style={{
                     fontFamily: 'Gyst, Georgia, serif',
                     fontWeight: 'bold',
@@ -88,7 +155,7 @@ function SuccessMessage({ isAttending, onClose }: { isAttending: boolean; onClos
                 }}
             >
                 {isAttending ? "We can't wait to see you!" : "We're sorry not to celebrate with you."}
-            </h2>
+            </motion.h2>
 
             <div
                 style={{
