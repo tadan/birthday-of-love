@@ -4,7 +4,7 @@ import { PhotoDecoration } from './PhotoDecoration'
 
 export function Hero() {
     return (
-        <section className='relative min-h-[100vh] flex flex-col items-center justify-center px-4 py-12 md:py-20 pb-80 md:pb-96'>
+        <section className='relative min-h-[100vh] flex flex-col items-center justify-center px-4 py-12 md:py-20 pb-48 md:pb-96'>
             {/* Background Image */}
             <motion.div
                 initial={{ opacity: 0 }}
@@ -26,7 +26,11 @@ export function Hero() {
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{
+                        duration: 0.6,
+                        delay: 0.3,
+                        ease: [0.22, 1, 0.36, 1],
+                    }}
                     className="font-['ABC_Favorit_Condensed_Unlicensed_Trial:Bold',sans-serif] text-[#f2ebd5] text-xl md:text-[32px] mb-8 md:mb-12 whitespace-nowrap"
                 >
                     29 August 2026 — Abruzzo
@@ -35,7 +39,11 @@ export function Hero() {
                 <motion.h1
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{
+                        duration: 0.8,
+                        delay: 0.5,
+                        ease: [0.16, 1, 0.3, 1],
+                    }}
                     style={{ fontFamily: 'Gyst, Georgia, serif' }}
                     className='font-bold text-[#fdc840] text-center text-6xl md:text-[120px] lg:text-[180px] leading-[0.9]'
                 >

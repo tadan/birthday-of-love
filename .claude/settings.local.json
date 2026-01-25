@@ -19,7 +19,9 @@
       "Skill(brainstorming)",
       "WebFetch(domain:www.figma.com)",
       "Bash(npm run dev:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(code .)",
+      "Bash(npm install:*)"
     ]
   }
 }

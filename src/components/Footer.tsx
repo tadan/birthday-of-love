@@ -5,11 +5,12 @@ export function Footer() {
         <section className='bg-[#232703] py-8 md:py-8 px-4 relative overflow-hidden'>
             <div className='max-w-[574px] mx-auto text-center relative z-10'>
                 <h2
+                    className='font-bold text-[#f2ebd5] mb-8 md:mb-2'
                     style={{
                         fontFamily: 'Gyst, Georgia, serif',
                         lineHeight: '1',
+                        fontSize: 'clamp(30px, 2.5vw, 72px)',
                     }}
-                    className='font-bold text-[#f2ebd5] text-2xl md:text-[72px] mb-8 md:mb-2'
                 >
                     Can't wait to see you there!
                 </h2>

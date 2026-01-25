@@ -4,7 +4,7 @@ const locationImage =
 
 export function Location() {
     return (
-        <section className='bg-[#fcdeea] py-16 md:py-24 px-2 md:px-4'>
+        <section className='bg-[#fcdeea] py-16 md:py-24 px-4'>
             <div className='max-w-[900px] mx-auto'>
                 <div className='grid md:grid-cols-2 gap-8 md:gap-12 items-start'>
                     {/* Text content */}
@@ -20,9 +20,9 @@ export function Location() {
                             style={{
                                 fontFamily: 'Times New Roman, Times, serif',
                             }}
-                            className='text-[#0d0d0d] text-[22px] space-y-6 md:space-y-8'
+                            className='text-[#0d0d0d] space-y-6 md:space-y-8'
                         >
-                            <p>
+                            <p className='text-[20px]'>
                                 We will celebrate at Agriturismo La Rustica in
                                 Abruzzo. La Rustica combines the warmth of a
                                 traditional farmhouse surronded by olive fields.

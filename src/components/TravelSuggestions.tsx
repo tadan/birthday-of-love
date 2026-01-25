@@ -7,6 +7,8 @@ const travelImages = {
         rome: 'https://wikitravel.org/upload/shared/4/44/Colosseum,_Rome.JPG',
         pescara:
             'https://italien.expert/wp-content/uploads/2024/09/Bahnhof-Pescara-Abruzzen-Italien-2.jpg',
+        bologna:
+            'https://wherewouldyougo.com/wp-content/uploads/2016/12/Piazza-Maggiore-Bologna-Italy.jpg',
     },
     whereToStay: {
         village:
@@ -19,6 +21,8 @@ const travelImages = {
             'https://static.cookist.it/wp-content/uploads/sites/21/2018/09/spaghetti-alla-chitarra.jpg',
         trabocchi:
             'https://www.majellando.it/_default_upload_bucket/image-thumb__1715__thumbnail-fullscreen-parallax_auto_ce334d53b086a8b6a73ca15df56e620b/vacanze%20sulla%20costa%20dei%20trabocchi%20in%20abruzzo.jpg',
+        vineyard:
+            'https://www.masciarelli.it/wp-content/uploads/2019/03/sostenibilita-background-1024x649.jpg',
     },
 }
 
@@ -44,7 +48,7 @@ export function TravelSuggestions() {
                 <div className='text-center mb-8 md:mb-12'>
                     <h2
                         style={{ fontFamily: 'Gyst, Georgia, serif' }}
-                        className='font-bold text-[#f2ebd5] text-4xl md:text-[56px] mb-4'
+                        className='font-bold text-[#f2ebd5] text-5xl md:text-[72px] mb-4'
                     >
                         Travel suggestions
                     </h2>
@@ -52,8 +56,9 @@ export function TravelSuggestions() {
                         style={{
                             fontFamily: 'Times New Roman, Times, serif',
                             width: '70%',
+                            marginTop: '1rem',
                         }}
-                        className='text-[#f2ebd5] text-[18px] md:text-[20px] max-w-[600px] mx-auto'
+                        className='text-[#f2ebd5] text-[20px] space-y-6 md:space-y-8 max-w-[600px] mx-auto'
                     >
                         Below are helpful suggestions for your travel plans.
                         Reach out if you are looking for something specific, we
@@ -165,6 +170,7 @@ export function TravelSuggestions() {
                             <div
                                 style={{
                                     fontFamily: 'Times New Roman, Times, serif',
+                                    fontSize: '20px',
                                 }}
                                 className='text-[#f2ebd5] space-y-6'
                             >
@@ -178,61 +184,29 @@ export function TravelSuggestions() {
                                     >
                                         How to get to Abruzzo{' '}
                                     </h3>
-                                    <p>
-                                        <em>
-                                            (display in order of
-                                            recommendations)
-                                        </em>
-                                    </p>
                                 </div>
 
                                 <div>
-                                    <h4 className='font-bold text-[18px] md:text-[20px] mb-2'>
+                                    <h4 className='font-bold text-[20px] md:text-[22px] mb-2'>
                                         Fly to Rome Airport
                                     </h4>
-                                    <p className='text-[18px] md:text-[18px] mb-2'>
-                                        Fiumicino is Rome's main airport and
-                                        most international flights land there.
-                                        The easiest option when arriving or
-                                        leaving because traffic is common.
-                                    </p>
-                                    <p className='text-[18px] md:text-[18px] mb-2'>
-                                        <strong>
-                                            From Fiumicino: <br></br>
-                                            <em>
-                                                <small>
-                                                    display in order of
-                                                    recommendations
-                                                </small>
-                                            </em>
-                                        </strong>
+                                    <p className='text-[20px] mb-2'>
+                                        Most international flights arrive at
+                                        Fiumicino. From there:
                                     </p>
                                     <ul
-                                        className='text-[18px] md:text-[18px] space-y-2 ml-6 pl-2'
+                                        className='text-[20px] md:text-[20px] space-y-1 ml-4'
                                         style={{
                                             listStyleType: 'disc',
                                             paddingLeft: '1.5rem',
                                         }}
                                     >
-                                        <li
-                                            className='pl-2'
-                                            style={{ display: 'list-item' }}
-                                        >
-                                            <span className='font-semibold'>
-                                                Rent a car
-                                            </span>{' '}
-                                            and drive to Abruzzo (2-2.5 hours)
+                                        <li style={{ display: 'list-item' }}>
+                                            Rent a car and drive (2-2.5 hours)
                                         </li>
-                                        <li
-                                            className='pl-2'
-                                            style={{ display: 'list-item' }}
-                                        >
-                                            <span className='text-[15px] md:text-[17px]'>
-                                                Take a bus to several
-                                                destination in Abruzzo (between
-                                                2.5h and 3.5h).{' '}
-                                            </span>
-                                            Check connections at{' '}
+                                        <li style={{ display: 'list-item' }}>
+                                            Take a bus to Abruzzo (2.5-3.5
+                                            hours) via{' '}
                                             <a
                                                 href='https://roadtoabruzzo.it/'
                                                 target='_blank'
@@ -252,48 +226,40 @@ export function TravelSuggestions() {
                                             >
                                                 roadtoabruzzo.it
                                             </a>
-                                            <br />
                                         </li>
-                                        <li
-                                            className='pl-2'
-                                            style={{ display: 'list-item' }}
-                                        >
-                                            <span className='text-[15px] md:text-[17px]'>
-                                                Take a train from Fiumicino to
-                                                Chieti or Pescara (min 4h). Book
-                                                trains at{' '}
-                                                <a
-                                                    href='https://trenitalia.com'
-                                                    target='_blank'
-                                                    rel='noopener noreferrer'
-                                                    style={{
-                                                        textDecoration:
-                                                            'underline',
-                                                        color: '#f2ebd5',
-                                                    }}
-                                                    onMouseEnter={(e) =>
-                                                        (e.currentTarget.style.color =
-                                                            '#fdc840')
-                                                    }
-                                                    onMouseLeave={(e) =>
-                                                        (e.currentTarget.style.color =
-                                                            '#f2ebd5')
-                                                    }
-                                                >
-                                                    trenitalia.com
-                                                </a>
-                                            </span>
+                                        <li style={{ display: 'list-item' }}>
+                                            Train to Chieti or Pescara (4+
+                                            hours) via{' '}
+                                            <a
+                                                href='https://trenitalia.com'
+                                                target='_blank'
+                                                rel='noopener noreferrer'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                    color: '#f2ebd5',
+                                                }}
+                                                onMouseEnter={(e) =>
+                                                    (e.currentTarget.style.color =
+                                                        '#fdc840')
+                                                }
+                                                onMouseLeave={(e) =>
+                                                    (e.currentTarget.style.color =
+                                                        '#f2ebd5')
+                                                }
+                                            >
+                                                trenitalia.com
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div>
-                                    <h4 className='font-bold text-[18px] md:text-[20px] mb-2'>
+                                    <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
                                         Fly to Abruzzo Airport (Pescara)
                                     </h4>
-                                    <p className='text-[18px] md:text-[18px] mb-2'>
+                                    <p className='text-[20px] mb-2'>
                                         <a
-                                            href='https://https://www.abruzzoairport.com/'
+                                            href='https://www.abruzzoairport.com/'
                                             target='_blank'
                                             rel='noopener noreferrer'
                                             style={{
@@ -311,45 +277,22 @@ export function TravelSuggestions() {
                                         >
                                             Abruzzo airport
                                         </a>{' '}
-                                        is on the outskirts of Pescara. Smaller
-                                        than Rome's. You can fly here if
-                                        traveling by a low-cost airline. You can
-                                        rent a car at the airport. Or if taking
-                                        a taxi call a day/evening in Pescara,
-                                        take a taxi to the venue the next day.
+                                        is small and serves only low-cost
+                                        airlines. You can rent a car there or
+                                        stay overnight in Pescara and take a
+                                        taxi to the venue.
                                     </p>
                                 </div>
 
                                 <div>
-                                    <h4 className='font-bold text-[18px] md:text-[20px] mb-2'>
-                                        Train from an Italian City
+                                    <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
+                                        Train from another Italian city
                                     </h4>
-                                    <p className='text-[18px] md:text-[18px] mb-2'>
-                                        You can fly to major Italian cities like
-                                        Milan, Bologna, Florence or Naples. Then
-                                        take a train to Pescara or Chieti (about
-                                        3-4 hours) and rent a car to see more of
-                                        Italy.
-                                    </p>
-                                    <p className='text-[18px] md:text-[18px] mb-2'>
-                                        Direct trains run from:
-                                    </p>
-                                    <ul
-                                        className='text-[18px] md:text-[18px] space-y-1 ml-4'
-                                        style={{
-                                            listStyleType: 'disc',
-                                            paddingLeft: '1.5rem',
-                                        }}
-                                    >
-                                        <li style={{ display: 'list-item' }}>
-                                            Milan to Pescara (5-6 hours)
-                                        </li>
-                                        <li style={{ display: 'list-item' }}>
-                                            Florence to Pescara (3-4 hours)
-                                        </li>
-                                    </ul>
-                                    <p className='text-[18px] md:text-[18px] mt-2'>
-                                        Book trains at{' '}
+                                    <p className='text-[20px] mb-2'>
+                                        Flying to Milan, Bologna, Florence, or
+                                        Naples? Take a train to Pescara (3-5
+                                        hours), then rent a car in Pescara
+                                        Centrale. Book at{' '}
                                         <a
                                             href='https://trenitalia.com'
                                             target='_blank'
@@ -369,6 +312,7 @@ export function TravelSuggestions() {
                                         >
                                             trenitalia.com
                                         </a>
+                                        .
                                     </p>
                                 </div>
                             </div>
@@ -395,6 +339,16 @@ export function TravelSuggestions() {
                                         height: 'auto',
                                     }}
                                 />
+                                <img
+                                    src={travelImages.howToGetThere.bologna}
+                                    alt='Piazza Maggiore in Bologna'
+                                    className='w-full'
+                                    style={{
+                                        aspectRatio: '16/9',
+                                        objectFit: 'cover',
+                                        height: 'auto',
+                                    }}
+                                />
                             </div>
                         </div>
                     </TabsContent>
@@ -405,6 +359,7 @@ export function TravelSuggestions() {
                             <div
                                 style={{
                                     fontFamily: 'Times New Roman, Times, serif',
+                                    fontSize: '20px',
                                 }}
                                 className='text-[#f2ebd5] space-y-6'
                             >
@@ -421,62 +376,113 @@ export function TravelSuggestions() {
                                 </div>
 
                                 <div>
-                                    <h4 className='font-bold text-[18px] md:text-[20px] mb-2'>
+                                    <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
                                         At the Venue
                                     </h4>
-                                    <p className='text-[16px] md:text-[18px] mb-2'>
-                                        Agriturismo La Rustica has simple rooms
-                                        available for one or two nights. Rooms
-                                        will be prioritised for families with
-                                        young children. Please indicate your
-                                        interest when you RSVP.
+                                    <p className='text-[20px] mb-2'>
+                                        La Rustica has simple rooms for one or
+                                        two nights, prioritized for families
+                                        with young children. Indicate interest
+                                        when you RSVP.
                                     </p>
                                 </div>
 
                                 <div>
-                                    <h4 className='font-bold text-[18px] md:text-[20px] mb-2'>
-                                        Nearby Towns
+                                    <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
+                                        Nearby
                                     </h4>
-                                    <p className='text-[16px] md:text-[18px] mb-2'>
-                                        There are many accommodation options in
-                                        nearby towns:
-                                    </p>
                                     <ul
-                                        className='text-[16px] md:text-[18px] space-y-1 ml-4'
+                                        className='text-[20px] md:text-[20px] space-y-1 ml-4 mb-2'
                                         style={{
                                             listStyleType: 'disc',
                                             paddingLeft: '1.5rem',
                                         }}
                                     >
                                         <li style={{ display: 'list-item' }}>
-                                            Chieti (15 minutes) - Historic city
-                                            with hotels and B&Bs
+                                            Chieti (15 min) - Historic city with
+                                            hotels and B&Bs
                                         </li>
                                         <li style={{ display: 'list-item' }}>
-                                            Pescara (25 minutes) - Coastal city
-                                            with many hotels
+                                            Pescara (25 min) - Coastal city with
+                                            many options
                                         </li>
                                         <li style={{ display: 'list-item' }}>
                                             Local agriturismos - Traditional
-                                            farmhouses in the countryside
+                                            countryside stays
                                         </li>
                                     </ul>
+                                    <br />
+                                    <p className='text-[20px] font-bold'>
+                                        Check our map for accommodation
+                                        recommendations.
+                                    </p>
                                 </div>
 
                                 <div>
-                                    <h4 className='font-bold text-[18px] md:text-[20px] mb-2'>
-                                        Make it a Holiday
+                                    <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
+                                        Make it a trip
                                     </h4>
-                                    <p className='text-[16px] md:text-[18px]'>
-                                        Consider staying a few extra days to
-                                        explore Abruzzo's mountains, beaches,
-                                        and medieval villages. We're happy to
-                                        share recommendations!
+                                    <p className='text-[20px]'>
+                                        Stay a few extra days to explore
+                                        Abruzzo's mountains, beaches, and
+                                        medieval villages. We're happy to share
+                                        recommendations!
                                     </p>
                                 </div>
                             </div>
 
                             <div className='space-y-4'>
+                                {/* Map link */}
+                                <a
+                                    href='https://maps.app.goo.gl/UCaYStEZki5CXXNx9'
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    style={{
+                                        display: 'block',
+                                        width: '100%',
+                                        backgroundColor: '#f2ebd5',
+                                        padding: '2rem',
+                                        textAlign: 'center',
+                                        textDecoration: 'none',
+                                        transition: 'all 0.2s ease',
+                                        border: '2px solid transparent',
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.backgroundColor =
+                                            '#fcdeea'
+                                        e.currentTarget.style.borderColor =
+                                            '#d8400f'
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.backgroundColor =
+                                            '#f2ebd5'
+                                        e.currentTarget.style.borderColor =
+                                            'transparent'
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            fontFamily: 'Gyst, Georgia, serif',
+                                            fontWeight: 'bold',
+                                            fontSize: '22px',
+                                            color: '#d8400f',
+                                            marginBottom: '0.5rem',
+                                        }}
+                                    >
+                                        View Accommodation Map
+                                    </div>
+                                    <div
+                                        style={{
+                                            fontFamily:
+                                                'Times New Roman, Times, serif',
+                                            fontSize: '16px',
+                                            color: '#0d0d0d',
+                                        }}
+                                    >
+                                        See tips gathered on a map that we
+                                        recommend
+                                    </div>
+                                </a>
                                 <img
                                     src={travelImages.whereToStay.village}
                                     alt='Historical Center of a Small Village in Abruzzo'
@@ -507,6 +513,7 @@ export function TravelSuggestions() {
                             <div
                                 style={{
                                     fontFamily: 'Times New Roman, Times, serif',
+                                    fontSize: '20px',
                                 }}
                                 className='text-[#f2ebd5] space-y-6'
                             >
@@ -523,27 +530,23 @@ export function TravelSuggestions() {
                                 </div>
 
                                 <div>
-                                    <h4 className='font-bold text-[18px] md:text-[20px] mb-2'>
+                                    <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
                                         Nature & Mountains
                                     </h4>
-                                    <p className='text-[16px] md:text-[18px] mb-2'>
-                                        Abruzzo is known for its stunning
-                                        national parks and mountain landscapes:
-                                    </p>
                                     <ul
-                                        className='text-[16px] md:text-[18px] space-y-1 ml-4'
+                                        className='text-[20px] md:text-[20px] space-y-1 ml-4'
                                         style={{
                                             listStyleType: 'disc',
                                             paddingLeft: '1.5rem',
                                         }}
                                     >
                                         <li style={{ display: 'list-item' }}>
-                                            Gran Sasso National Park - Hiking
-                                            and breathtaking views
+                                            Majella National Park - Endless
+                                            hikes and wonderful nature
                                         </li>
                                         <li style={{ display: 'list-item' }}>
-                                            Majella National Park - Wildlife and
-                                            ancient hermitages
+                                            Gran Sasso National Park -
+                                            Breathtaking mountain views
                                         </li>
                                         <li style={{ display: 'list-item' }}>
                                             Campo Imperatore - Known as "Little
@@ -553,19 +556,32 @@ export function TravelSuggestions() {
                                 </div>
 
                                 <div>
-                                    <h4 className='font-bold text-[18px] md:text-[20px] mb-2'>
+                                    <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
+                                        Bike the Coast
+                                    </h4>
+                                    <p className='text-[20px] mb-2'>
+                                        Ride the Via Verde dei Trabocchi, a 42km
+                                        coastal bike path along the Adriatic
+                                        with stunning views of traditional
+                                        fishing platforms.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
                                         Historic Towns
                                     </h4>
-                                    <p className='text-[16px] md:text-[18px] mb-2'>
-                                        Visit beautiful medieval villages:
-                                    </p>
                                     <ul
-                                        className='text-[16px] md:text-[18px] space-y-1 ml-4'
+                                        className='text-[20px] md:text-[20px] space-y-1 ml-4'
                                         style={{
                                             listStyleType: 'disc',
                                             paddingLeft: '1.5rem',
                                         }}
                                     >
+                                        <li style={{ display: 'list-item' }}>
+                                            Pacentro - Medieval hilltop village
+                                            with stone houses
+                                        </li>
                                         <li style={{ display: 'list-item' }}>
                                             Santo Stefano di Sessanio - Ancient
                                             stone village
@@ -575,21 +591,20 @@ export function TravelSuggestions() {
                                             confetti candy
                                         </li>
                                         <li style={{ display: 'list-item' }}>
-                                            Scanno - Picturesque mountain town
-                                            with a heart-shaped lake
+                                            Scanno - Mountain town with a
+                                            heart-shaped lake
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div>
-                                    <h4 className='font-bold text-[18px] md:text-[20px] mb-2'>
-                                        Coast & Food
+                                    <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
+                                        Food & Wine
                                     </h4>
-                                    <p className='text-[16px] md:text-[18px]'>
-                                        Enjoy the Adriatic coast in Pescara,
-                                        visit local wineries, and taste
-                                        traditional dishes like arrosticini
-                                        (lamb skewers) and pasta alla chitarra.
+                                    <p className='text-[20px]'>
+                                        Enjoy local wineries and traditional
+                                        dishes like arrosticini (lamb skewers)
+                                        and pasta alla chitarra.
                                     </p>
                                 </div>
                             </div>
@@ -610,6 +625,16 @@ export function TravelSuggestions() {
                                 <img
                                     src={travelImages.whatToDo.trabocchi}
                                     alt='trabocchi on the adriatic sea'
+                                    className='w-full'
+                                    style={{
+                                        aspectRatio: '16/9',
+                                        objectFit: 'cover',
+                                        height: 'auto',
+                                    }}
+                                />
+                                <img
+                                    src={travelImages.whatToDo.vineyard}
+                                    alt='Vineyard in Abruzzo'
                                     className='w-full'
                                     style={{
                                         aspectRatio: '16/9',
