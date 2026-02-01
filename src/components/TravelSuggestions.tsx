@@ -7,8 +7,6 @@ const travelImages = {
         rome: 'https://wikitravel.org/upload/shared/4/44/Colosseum,_Rome.JPG',
         pescara:
             'https://italien.expert/wp-content/uploads/2024/09/Bahnhof-Pescara-Abruzzen-Italien-2.jpg',
-        bologna:
-            'https://wherewouldyougo.com/wp-content/uploads/2016/12/Piazza-Maggiore-Bologna-Italy.jpg',
     },
     whereToStay: {
         village:
@@ -21,8 +19,8 @@ const travelImages = {
             'https://static.cookist.it/wp-content/uploads/sites/21/2018/09/spaghetti-alla-chitarra.jpg',
         trabocchi:
             'https://www.majellando.it/_default_upload_bucket/image-thumb__1715__thumbnail-fullscreen-parallax_auto_ce334d53b086a8b6a73ca15df56e620b/vacanze%20sulla%20costa%20dei%20trabocchi%20in%20abruzzo.jpg',
-        vineyard:
-            'https://www.masciarelli.it/wp-content/uploads/2019/03/sostenibilita-background-1024x649.jpg',
+        gransasso:
+            'https://tourismmedia.italia.it/is/image/mitur/1600X1000_studiate_il_percorso_weekend_4-1?wid=1600&hei=1000&fit=constrain,1&fmt=webp',
     },
 }
 
@@ -43,7 +41,7 @@ export function TravelSuggestions() {
 
     return (
         <section className='bg-[#232703] py-16 md:py-24 px-4'>
-            <div className='max-w-[900px] mx-auto'>
+            <div className='mx-auto' style={{ maxWidth: '1060px' }}>
                 {/* Heading */}
                 <div className='text-center mb-8 md:mb-12'>
                     <h2
@@ -182,7 +180,7 @@ export function TravelSuggestions() {
                                         }}
                                         className='font-bold text-[#f2ebd5] text-2xl md:text-3xl mb-4'
                                     >
-                                        How to get to Abruzzo{' '}
+                                        How to get to Abruzzo
                                     </h3>
                                 </div>
 
@@ -291,7 +289,7 @@ export function TravelSuggestions() {
                                     <p className='text-[20px] mb-2'>
                                         Flying to Milan, Bologna, Florence, or
                                         Naples? Take a train to Pescara (3-5
-                                        hours), then rent a car in Pescara
+                                        hours), then rent a car at Pescara
                                         Centrale. Book at{' '}
                                         <a
                                             href='https://trenitalia.com'
@@ -339,16 +337,6 @@ export function TravelSuggestions() {
                                         height: 'auto',
                                     }}
                                 />
-                                <img
-                                    src={travelImages.howToGetThere.bologna}
-                                    alt='Piazza Maggiore in Bologna'
-                                    className='w-full'
-                                    style={{
-                                        aspectRatio: '16/9',
-                                        objectFit: 'cover',
-                                        height: 'auto',
-                                    }}
-                                />
                             </div>
                         </div>
                     </TabsContent>
@@ -377,19 +365,7 @@ export function TravelSuggestions() {
 
                                 <div>
                                     <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
-                                        At the Venue
-                                    </h4>
-                                    <p className='text-[20px] mb-2'>
-                                        La Rustica has simple rooms for one or
-                                        two nights, prioritized for families
-                                        with young children. Indicate interest
-                                        when you RSVP.
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
-                                        Nearby
+                                        In the Area
                                     </h4>
                                     <ul
                                         className='text-[20px] md:text-[20px] space-y-1 ml-4 mb-2'
@@ -412,15 +388,29 @@ export function TravelSuggestions() {
                                         </li>
                                     </ul>
                                     <br />
-                                    <p className='text-[20px] font-bold'>
+                                    <a
+                                        href='https://maps.app.goo.gl/UCaYStEZki5CXXNx9'
+                                        className='text-[20px]'
+                                        style={{ textDecoration: 'underline' }}
+                                    >
                                         Check our map for accommodation
                                         recommendations.
-                                    </p>
+                                    </a>
                                 </div>
-
                                 <div>
                                     <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
-                                        Make it a trip
+                                        At the Venue
+                                    </h4>
+                                    <p className='text-[20px] mb-2'>
+                                        La Rustica has simple rooms for one or
+                                        two nights, prioritized for families
+                                        with young children. Indicate interest
+                                        when you RSVP.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
+                                        Make it a Trip
                                     </h4>
                                     <p className='text-[20px]'>
                                         Stay a few extra days to explore
@@ -479,8 +469,7 @@ export function TravelSuggestions() {
                                             color: '#0d0d0d',
                                         }}
                                     >
-                                        See tips gathered on a map that we
-                                        recommend
+                                        See our recommended places on a map
                                     </div>
                                 </a>
                                 <img
@@ -531,7 +520,7 @@ export function TravelSuggestions() {
 
                                 <div>
                                     <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
-                                        Nature & Mountains
+                                        Mountains & Nature
                                     </h4>
                                     <ul
                                         className='text-[20px] md:text-[20px] space-y-1 ml-4'
@@ -541,30 +530,130 @@ export function TravelSuggestions() {
                                         }}
                                     >
                                         <li style={{ display: 'list-item' }}>
-                                            Majella National Park - Endless
-                                            hikes and wonderful nature
+                                            <a
+                                                href='https://www.italia.it/en/italy/abruzzo-lazio-molise-national-park'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Abruzzo, Lazio e Molise National
+                                                Park
+                                            </a>{' '}
+                                            - Italy's oldest national park, home
+                                            to wolves, bears & chamois
                                         </li>
                                         <li style={{ display: 'list-item' }}>
-                                            Gran Sasso National Park -
-                                            Breathtaking mountain views
+                                            <a
+                                                href='https://www.italia.it/en/abruzzo/l-aquila/majella-national-park'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Majella National Park
+                                            </a>{' '}
+                                            - Endless hikes and wonderful
+                                            nature, home to Italy's largest
+                                            adventure park dedicated to little
+                                            ones.
                                         </li>
                                         <li style={{ display: 'list-item' }}>
-                                            Campo Imperatore - Known as "Little
-                                            Tibet"
+                                            <a
+                                                href='https://www.italia.it/en/abruzzo/gran-sasso'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Gran Sasso d'Italia National
+                                                Park
+                                            </a>{' '}
+                                            - The highest peak in the Apennines,
+                                            popular for skiing, climbing &
+                                            hiking.
+                                        </li>
+                                        <li style={{ display: 'list-item' }}>
+                                            <a
+                                                href='https://www.italia.it/en/abruzzo/l-aquila/rocca-calascio'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Rocca Calascio
+                                            </a>{' '}
+                                            - The highest castle in the
+                                            Apennines and one of the highest
+                                            fortifications in Italy.
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div>
                                     <h4 className='font-bold text-[20px] md:text-[20px] mb-2'>
-                                        Bike the Coast
+                                        Sea & Coast
                                     </h4>
-                                    <p className='text-[20px] mb-2'>
-                                        Ride the Via Verde dei Trabocchi, a 42km
-                                        coastal bike path along the Adriatic
-                                        with stunning views of traditional
-                                        fishing platforms.
-                                    </p>
+                                    <ul
+                                        className='text-[20px] md:text-[20px] space-y-1 ml-4'
+                                        style={{
+                                            listStyleType: 'disc',
+                                            paddingLeft: '1.5rem',
+                                        }}
+                                    >
+                                        <li style={{ display: 'list-item' }}>
+                                            <a
+                                                href='https://iheartabruzzo.com/via-verde-abruzzo-coastal-bike-path/'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Via Verde
+                                            </a>{' '}
+                                            - 42km coastal bike path along the
+                                            Adriatic with stunning views
+                                        </li>
+                                        <li style={{ display: 'list-item' }}>
+                                            <a
+                                                href='https://www.italia.it/en/abruzzo/costa-dei-trabocchi'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Costa dei Trabocchi
+                                            </a>{' '}
+                                            - Traditional fishing platforms on
+                                            stilts along the coastline
+                                        </li>
+                                        <li style={{ display: 'list-item' }}>
+                                            <a
+                                                href='https://www.italia.it/en/abruzzo/chieti/punta-aderci'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Punta Aderci
+                                            </a>{' '}
+                                            - Nature reserve with pristine
+                                            beaches and coastal trails
+                                        </li>
+                                        <li style={{ display: 'list-item' }}>
+                                            <a
+                                                href='https://www.italia.it/en/abruzzo/things-to-do/teramano-coast-art-relax-nature'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Teramano Coast
+                                            </a>{' '}
+                                            - Art, relaxation, and nature along
+                                            the northern Adriatic coast
+                                        </li>
+                                    </ul>
                                 </div>
 
                                 <div>
@@ -579,20 +668,55 @@ export function TravelSuggestions() {
                                         }}
                                     >
                                         <li style={{ display: 'list-item' }}>
-                                            Pacentro - Medieval hilltop village
-                                            with stone houses
+                                            <a
+                                                href='https://maps.app.goo.gl/fDywVBpPv2KAM2z76'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Pacentro
+                                            </a>{' '}
+                                            - Medieval hilltop village with
+                                            stone houses
                                         </li>
                                         <li style={{ display: 'list-item' }}>
-                                            Santo Stefano di Sessanio - Ancient
-                                            stone village
+                                            <a
+                                                href='https://www.italia.it/en/abruzzo/santo-stefano-di-sessanio'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Santo Stefano di Sessanio
+                                            </a>{' '}
+                                            - Ancient stone village
                                         </li>
                                         <li style={{ display: 'list-item' }}>
-                                            Sulmona - Baroque architecture and
-                                            confetti candy
+                                            <a
+                                                href='https://maps.app.goo.gl/h15ajumysPqh6pP48'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Sulmona
+                                            </a>{' '}
+                                            - Baroque architecture, famous for
+                                            its red garlic and confetti candy
                                         </li>
                                         <li style={{ display: 'list-item' }}>
-                                            Scanno - Mountain town with a
-                                            heart-shaped lake
+                                            <a
+                                                href='https://www.italia.it/en/abruzzo/l-aquila/things-to-do/visita-scanno-in-automobile'
+                                                target='_blank'
+                                                style={{
+                                                    textDecoration: 'underline',
+                                                }}
+                                            >
+                                                Scanno
+                                            </a>{' '}
+                                            - Mountain town with a heart-shaped
+                                            lake
                                         </li>
                                     </ul>
                                 </div>
@@ -602,19 +726,46 @@ export function TravelSuggestions() {
                                         Food & Wine
                                     </h4>
                                     <p className='text-[20px]'>
-                                        Enjoy local wineries and traditional
-                                        dishes like arrosticini (lamb skewers)
-                                        and pasta alla chitarra.
+                                        <a
+                                            href='https://www.italia.it/en/abruzzo/things-to-do/flavours-of-the-sea-hills-and-vineyards-of-abruzzo#vineyards-caught-between-sea-and-sky'
+                                            target='_blank'
+                                            style={{
+                                                textDecoration: 'underline',
+                                            }}
+                                        >
+                                            Enjoy Abruzzo hospitality
+                                        </a>{' '}
+                                        at local wineries and savor traditional
+                                        dishes like{' '}
+                                        <a
+                                            href='https://www.italia.it/en/abruzzo/things-to-do/arrosticini'
+                                            target='_blank'
+                                            style={{
+                                                textDecoration: 'underline',
+                                            }}
+                                        >
+                                            arrosticini
+                                        </a>
+                                        {'  '}
+                                        and{' '}
+                                        <a
+                                            href='https://www.youtube.com/watch?v=GDUp5SBF7BM'
+                                            target='_blank'
+                                            style={{
+                                                textDecoration: 'underline',
+                                            }}
+                                        >
+                                            pasta alla chitarra
+                                        </a>
+                                        .
                                     </p>
                                 </div>
                             </div>
 
                             <div className='space-y-4'>
                                 <img
-                                    src={
-                                        travelImages.whatToDo.spaghettiChitarra
-                                    }
-                                    alt='spaghetti alla chitarra'
+                                    src={travelImages.whatToDo.gransasso}
+                                    alt='gran sasso mountain'
                                     className='w-full'
                                     style={{
                                         aspectRatio: '16/9',
@@ -633,8 +784,10 @@ export function TravelSuggestions() {
                                     }}
                                 />
                                 <img
-                                    src={travelImages.whatToDo.vineyard}
-                                    alt='Vineyard in Abruzzo'
+                                    src={
+                                        travelImages.whatToDo.spaghettiChitarra
+                                    }
+                                    alt='spaghetti alla chitarra'
                                     className='w-full'
                                     style={{
                                         aspectRatio: '16/9',

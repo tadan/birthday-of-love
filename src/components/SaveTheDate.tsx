@@ -48,6 +48,10 @@ export function SaveTheDate() {
                         and into the evening.
                     </p>
 
+                    {/* RSVP button */}
+                    <div className='text-center' style={{ marginTop: '2rem' }}>
+                        <RSVPButton />
+                    </div>
                     <motion.span
                         animate={{
                             opacity: [1, 0.7, 1],
@@ -58,36 +62,13 @@ export function SaveTheDate() {
                             ease: 'easeInOut',
                         }}
                         style={{
-                            textDecoration: 'underline',
-                            textDecorationColor: '#d8400f',
-                            textDecorationThickness: '2px',
-                            textUnderlineOffset: '3px',
+                            marginTop: '1rem',
+                            fontSize: '1.5rem',
                             fontWeight: 'bold',
                         }}
                     >
                         Please RSVP by the 31th of May
                     </motion.span>
-
-                    {/* RSVP button */}
-                    <div className='mt-8 text-center'>
-                        <RSVPButton />
-                    </div>
-
-                    {/* Calendar link */}
-                    <div className='mt-4 text-center'>
-                        <button
-                            onClick={downloadCalendarEvent}
-                            style={{
-                                fontFamily: 'Times New Roman, Times, serif',
-                                cursor: 'pointer',
-                                transition:
-                                    'all var(--duration-fast) var(--ease-out-quart)',
-                            }}
-                            className='text-[#d8400f] text-[18px] underline hover:no-underline bg-transparent border-none'
-                        >
-                            Save the event in your calendar
-                        </button>
-                    </div>
                 </motion.div>
             </motion.div>
         </section>

@@ -10,9 +10,13 @@ interface RSVPFormData {
     surname: string
     isAttending: string
     foodPreference?: string
-    foodAllergies?: string
+    lactoseIntolerant?: boolean
+    celiac?: boolean
+    nutAllergy?: boolean
+    otherAllergy?: string
     address?: string
     guests?: string
+    shuttleService?: string
     notes?: string
 }
 
@@ -54,11 +58,22 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                 emailBody += `\n\nFood preference: ${
                     data.foodPreference || 'Not specified'
                 }`
-                emailBody += `\nFood allergies/restrictions: ${
-                    data.foodAllergies || 'None'
+
+                // Add allergies/intolerances
+                const allergies = []
+                if (data.lactoseIntolerant) allergies.push('Lactose intolerant')
+                if (data.celiac) allergies.push('Celiac (gluten-free)')
+                if (data.nutAllergy) allergies.push('Nut allergy')
+                if (data.otherAllergy) allergies.push(data.otherAllergy)
+                emailBody += `\nAllergies/Intolerances: ${
+                    allergies.length > 0 ? allergies.join(', ') : 'None'
                 }`
+
                 emailBody += `\nAddress: ${data.address || 'Not provided'}`
                 emailBody += `\nGuests: ${data.guests || 'None specified'}`
+                emailBody += `\nShuttle service: ${
+                    data.shuttleService || 'Not specified'
+                }`
                 emailBody += `\nAdditional notes: ${data.notes || 'None'}`
             } else {
                 emailBody += '\n\n(Sent regrets)'
@@ -80,9 +95,13 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                     attending: attendingText,
                     ...(attending === 'yes' && {
                         foodPreference: data.foodPreference,
-                        foodAllergies: data.foodAllergies,
+                        lactoseIntolerant: data.lactoseIntolerant,
+                        celiac: data.celiac,
+                        nutAllergy: data.nutAllergy,
+                        otherAllergy: data.otherAllergy,
                         address: data.address,
                         guests: data.guests,
+                        shuttleService: data.shuttleService,
                         notes: data.notes,
                     }),
                 }),
@@ -105,7 +124,31 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
     }
 
     return (
-        <div className='max-w-2xl mx-auto'>
+        <div className='max-w-2xl mx-auto relative'>
+            {/* Close button */}
+            <button
+                type='button'
+                onClick={onClose}
+                style={{
+                    position: 'absolute',
+                    top: '-4rem',
+                    right: '-1rem',
+                    background: 'none',
+                    border: 'none',
+                    fontSize: '3rem',
+                    cursor: 'pointer',
+                    color: '#0d0d0d',
+                    lineHeight: '1',
+                    padding: '0.5rem',
+                    zIndex: 10,
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#d8400f')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = '#0d0d0d')}
+                aria-label='Close form'
+            >
+                ×
+            </button>
+
             <form onSubmit={handleSubmit(onFormSubmit)} className='space-y-6'>
                 <h2
                     style={{ fontFamily: 'Gyst, Georgia, serif' }}
@@ -272,6 +315,51 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                 {/* Conditional fields - only show if attending */}
                 {isAttending && (
                     <>
+                        {/* Your address */}
+                        <div>
+                            <label
+                                htmlFor='address'
+                                style={{
+                                    fontFamily: 'Times New Roman, Times, serif',
+                                    textAlign: 'left',
+                                    display: 'block',
+                                    fontSize: '1.5rem',
+                                    marginBottom: '0.5rem',
+                                }}
+                                className='block text-left text-black text-lg mb-2'
+                            >
+                                Your address*
+                            </label>
+                            <input
+                                id='address'
+                                type='text'
+                                placeholder='Add your address for receiving the invitation'
+                                {...register('address', {
+                                    required: 'Address is required',
+                                })}
+                                style={{
+                                    backgroundColor: 'white',
+                                    paddingLeft: '1rem',
+                                    paddingTop: '.5rem',
+                                    paddingBottom: '.5rem',
+                                    fontSize: '1.2rem',
+                                }}
+                                className='w-full h-12'
+                                disabled={isSubmitting}
+                            />
+                            {errors.address && (
+                                <p
+                                    style={{
+                                        color: 'red',
+                                        marginTop: '0.5rem',
+                                        fontSize: '0.95rem',
+                                        textAlign: 'left',
+                                    }}
+                                >
+                                    {errors.address.message}
+                                </p>
+                            )}
+                        </div>
                         {/* Food preference */}
                         <div>
                             <label
@@ -410,10 +498,10 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                 </p>
                             )}
                         </div>
-                        {/* Food allergies/restrictions */}
+
+                        {/* Common allergies/intolerances */}
                         <div>
                             <label
-                                htmlFor='allergies'
                                 style={{
                                     fontFamily: 'Times New Roman, Times, serif',
                                     textAlign: 'left',
@@ -421,68 +509,107 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                     fontSize: '1.5rem',
                                     marginBottom: '0.5rem',
                                 }}
+                                className='block text-left text-black text-lg mb-3'
                             >
-                                Food allergies/restrictions
+                                Allergies/intolerances
                             </label>
-                            <input
-                                id='allergies'
-                                type='text'
-                                placeholder='Celiac, etc.'
-                                {...register('foodAllergies')}
-                                style={{
-                                    backgroundColor: 'white',
-                                    paddingLeft: '1rem',
-                                    paddingTop: '.5rem',
-                                    paddingBottom: '.5rem',
-                                    fontSize: '1.2rem',
-                                }}
-                                className='w-full h-12 text-base px-3 rounded'
-                            />
-                        </div>
-                        {/* Your address */}
-                        <div>
-                            <label
-                                htmlFor='address'
-                                style={{
-                                    fontFamily: 'Times New Roman, Times, serif',
-                                    textAlign: 'left',
-                                    display: 'block',
-                                    fontSize: '1.5rem',
-                                    marginBottom: '0.5rem',
-                                }}
-                                className='block text-left text-black text-lg mb-2'
-                            >
-                                Your address*
-                            </label>
-                            <input
-                                id='address'
-                                type='text'
-                                placeholder='Add your address for receiving the invitation'
-                                {...register('address', {
-                                    required: 'Address is required',
-                                })}
-                                style={{
-                                    backgroundColor: 'white',
-                                    paddingLeft: '1rem',
-                                    paddingTop: '.5rem',
-                                    paddingBottom: '.5rem',
-                                    fontSize: '1.2rem',
-                                }}
-                                className='w-full h-12'
-                                disabled={isSubmitting}
-                            />
-                            {errors.address && (
-                                <p
-                                    style={{
-                                        color: 'red',
-                                        marginTop: '0.5rem',
-                                        fontSize: '0.95rem',
-                                        textAlign: 'left',
-                                    }}
-                                >
-                                    {errors.address.message}
-                                </p>
-                            )}
+                            <div className='space-y-2'>
+                                <div className='flex items-center'>
+                                    <input
+                                        type='checkbox'
+                                        id='lactose'
+                                        {...register('lactoseIntolerant')}
+                                        style={{ accentColor: '#0d0d0d' }}
+                                        className='w-5 h-5'
+                                        disabled={isSubmitting}
+                                    />
+                                    <label
+                                        htmlFor='lactose'
+                                        style={{
+                                            fontFamily:
+                                                'Times New Roman, Times, serif',
+                                            marginLeft: '.5rem',
+                                            cursor: 'pointer',
+                                        }}
+                                        className='text-black text-base'
+                                    >
+                                        Lactose intolerant
+                                    </label>
+                                </div>
+                                <div className='flex items-center'>
+                                    <input
+                                        type='checkbox'
+                                        id='celiac'
+                                        {...register('celiac')}
+                                        style={{ accentColor: '#0d0d0d' }}
+                                        className='w-5 h-5'
+                                        disabled={isSubmitting}
+                                    />
+                                    <label
+                                        htmlFor='celiac'
+                                        style={{
+                                            fontFamily:
+                                                'Times New Roman, Times, serif',
+                                            marginLeft: '.5rem',
+                                            cursor: 'pointer',
+                                        }}
+                                        className='text-black text-base'
+                                    >
+                                        Celiac (gluten-free)
+                                    </label>
+                                </div>
+                                <div className='flex items-center'>
+                                    <input
+                                        type='checkbox'
+                                        id='nutAllergy'
+                                        {...register('nutAllergy')}
+                                        style={{ accentColor: '#0d0d0d' }}
+                                        className='w-5 h-5'
+                                        disabled={isSubmitting}
+                                    />
+                                    <label
+                                        htmlFor='nutAllergy'
+                                        style={{
+                                            fontFamily:
+                                                'Times New Roman, Times, serif',
+                                            marginLeft: '.5rem',
+                                            cursor: 'pointer',
+                                        }}
+                                        className='text-black text-base'
+                                    >
+                                        Nut allergy
+                                    </label>
+                                </div>
+                                <div className='flex items-start gap-2'>
+                                    <span
+                                        style={{
+                                            fontFamily:
+                                                'Times New Roman, Times, serif',
+                                            paddingTop: '0.375rem',
+                                        }}
+                                        className='text-black text-base'
+                                    >
+                                        Other:
+                                    </span>
+                                    <input
+                                        id='otherAllergy'
+                                        type='text'
+                                        placeholder='Please specify'
+                                        {...register('otherAllergy')}
+                                        style={{
+                                            backgroundColor: 'white',
+                                            paddingLeft: '1rem',
+                                            paddingTop: '.5rem',
+                                            paddingBottom: '.5rem',
+                                            marginLeft: '0.5rem',
+                                            fontSize: '1.2rem',
+                                            flex: 1,
+                                        }}
+                                        className='h-12 text-base px-3 rounded'
+                                        disabled={isSubmitting}
+                                    />
+                                </div>
+                            </div>
                         </div>
 
                         {/* Will you bring a guest? */}
@@ -496,7 +623,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                     fontSize: '1.5rem',
                                 }}
                             >
-                                Will you bring a guest?*
+                                Will you bring a guest?
                             </label>
                             <p
                                 style={{
@@ -506,16 +633,14 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                     marginBottom: '0.5rem',
                                 }}
                             >
-                                Please let us know who will attend with you.
-                                You, your partner and children are very welcome.
+                                Please let us know who will attend with you and
+                                their dietary preferences if different from
+                                yours.
                             </p>
                             <textarea
                                 id='guests'
-                                placeholder='Full names of those attending with you, otherwise write my kind self'
-                                {...register('guests', {
-                                    required:
-                                        'Please list who will attend with you',
-                                })}
+                                placeholder='Full names of those attending with you'
+                                {...register('guests')}
                                 style={{
                                     backgroundColor: 'white',
                                     paddingLeft: '1rem',
@@ -536,6 +661,128 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                     }}
                                 >
                                     {errors.guests.message}
+                                </p>
+                            )}
+                        </div>
+
+                        {/* Shuttle service */}
+                        <div>
+                            <label
+                                style={{
+                                    fontFamily: 'Times New Roman, Times, serif',
+                                    textAlign: 'left',
+                                    display: 'block',
+                                    fontSize: '1.5rem',
+                                    marginBottom: '0.5rem',
+                                }}
+                                className='block text-left text-black text-lg mb-3'
+                            >
+                                Shuttle service*
+                            </label>
+                            <p
+                                style={{
+                                    fontFamily: 'Times New Roman, Times, serif',
+                                    fontSize: '1.2rem',
+                                    textAlign: 'left',
+                                    marginBottom: '0.5rem',
+                                }}
+                            >
+                                Would you like to use the shuttle service from
+                                Pescara Centrale on the day of the event?
+                            </p>
+                            <div className='space-y-2'>
+                                <div className='flex items-center'>
+                                    <input
+                                        type='radio'
+                                        id='shuttle-yes'
+                                        value='yes'
+                                        {...register('shuttleService', {
+                                            required: isAttending
+                                                ? 'Please select a shuttle option'
+                                                : false,
+                                        })}
+                                        style={{
+                                            accentColor: '#0d0d0d',
+                                        }}
+                                        disabled={isSubmitting}
+                                    />
+                                    <label
+                                        htmlFor='shuttle-yes'
+                                        style={{
+                                            fontFamily:
+                                                'Times New Roman, Times, serif',
+                                            cursor: 'pointer',
+                                            marginLeft: '.5rem',
+                                        }}
+                                        className='text-black text-base'
+                                    >
+                                        Yes, please reserve a spot
+                                    </label>
+                                </div>
+                                <div className='flex items-center'>
+                                    <input
+                                        type='radio'
+                                        id='shuttle-no'
+                                        value='no'
+                                        {...register('shuttleService', {
+                                            required: isAttending
+                                                ? 'Please select a shuttle option'
+                                                : false,
+                                        })}
+                                        style={{ accentColor: '#0d0d0d' }}
+                                        disabled={isSubmitting}
+                                    />
+                                    <label
+                                        htmlFor='shuttle-no'
+                                        style={{
+                                            fontFamily:
+                                                'Times New Roman, Times, serif',
+                                            cursor: 'pointer',
+                                            marginLeft: '.5rem',
+                                        }}
+                                        className='text-black text-base'
+                                    >
+                                        No, thank you!
+                                    </label>
+                                </div>
+                                <div className='flex items-center'>
+                                    <input
+                                        type='radio'
+                                        id='shuttle-undecided'
+                                        value='undecided'
+                                        {...register('shuttleService', {
+                                            required: isAttending
+                                                ? 'Please select a shuttle option'
+                                                : false,
+                                        })}
+                                        style={{ accentColor: '#0d0d0d' }}
+                                        disabled={isSubmitting}
+                                    />
+                                    <label
+                                        htmlFor='shuttle-undecided'
+                                        style={{
+                                            fontFamily:
+                                                'Times New Roman, Times, serif',
+                                            cursor: 'pointer',
+                                            marginLeft: '.5rem',
+                                        }}
+                                        className='text-black text-base'
+                                    >
+                                        Not sure yet, will confirm closer to the
+                                        date
+                                    </label>
+                                </div>
+                            </div>
+                            {errors.shuttleService && (
+                                <p
+                                    style={{
+                                        color: 'red',
+                                        marginTop: '0.5rem',
+                                        fontSize: '0.95rem',
+                                        textAlign: 'left',
+                                    }}
+                                >
+                                    {errors.shuttleService.message}
                                 </p>
                             )}
                         </div>

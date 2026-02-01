@@ -78,7 +78,7 @@ export function RSVPModal({ isOpen, onClose }: RSVPModalProps) {
                                     transition={{ duration: 0.2 }}
                                     style={{
                                         width: '100%',
-                                        maxWidth: '48rem',
+                                        maxWidth: '40rem',
                                         margin: '0 auto',
                                     }}
                                 >
@@ -194,17 +194,22 @@ function SuccessMessage({
             >
                 {isAttending ? (
                     <>
-                        <p style={{ marginBottom: '1rem' }}>
+                        <p
+                            style={{
+                                marginBottom: '1rem',
+                                fontSize: '1.25rem',
+                            }}
+                        >
                             Keep an eye out for an invite in the snail mail!
-                        </p>
-                        <p style={{ marginBottom: '1rem' }}>
+                            <br></br>
                             If you have any questions don't hesitate to contact
-                            us on our mobiles or email{' '}
+                            us on our mobiles or email <br></br>
                             <a
                                 href='mailto:wedding@daniele.is'
                                 style={{
                                     color: '#d8400f',
                                     textDecoration: 'underline',
+                                    fontSize: '1.25rem',
                                 }}
                                 onMouseEnter={(e) =>
                                     (e.currentTarget.style.textDecoration =
@@ -217,20 +222,30 @@ function SuccessMessage({
                             >
                                 wedding@daniele.is
                             </a>
-                            <p>
-                                In the next few weeks we will be creating
-                                WhatsApp Group that you can join with common
-                                questions and answers, travel tips and more.
-                            </p>
+                            <br></br>
+                            <br></br>
+                            In the next few weeks we will be creating WhatsApp
+                            Group that you can join with common questions and
+                            answers, travel tips and more.
                         </p>
                     </>
                 ) : (
                     <>
-                        <p style={{ marginBottom: '1rem' }}>
+                        <p
+                            style={{
+                                marginBottom: '1rem',
+                                fontSize: '1.25rem',
+                            }}
+                        >
                             If you change your mind please let us know. We hope
                             to see you in 2026.
                         </p>
-                        <p style={{ marginBottom: '1rem' }}>
+                        <p
+                            style={{
+                                marginBottom: '1rem',
+                                fontSize: '1.25rem',
+                            }}
+                        >
                             If you have any questions don't hesitate to contact
                             us on our mobiles or email{' '}
                             <a
@@ -238,6 +253,7 @@ function SuccessMessage({
                                 style={{
                                     color: '#d8400f',
                                     textDecoration: 'underline',
+                                    fontSize: '1.25rem',
                                 }}
                                 onMouseEnter={(e) =>
                                     (e.currentTarget.style.textDecoration =
