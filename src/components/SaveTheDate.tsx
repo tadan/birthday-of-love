@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion'
-import imgFlowerDisco from 'figma:asset/d21d4748e2c1c1b39d896cb6702f42ec05bce613.png'
-import { downloadCalendarEvent } from '../utils/calendar'
 import { RSVPButton } from './RSVPButton'
+import { useLang } from '../i18n/LangContext'
+import { t } from '../i18n/translations'
 
 export function SaveTheDate() {
+    const { lang } = useLang()
+
     return (
         <section className='bg-[#f2ebd5] pt-32 md:pt-56 pb-16 md:pb-24 px-4'>
             <motion.div
@@ -25,7 +27,7 @@ export function SaveTheDate() {
                     style={{ fontFamily: 'Gyst, Georgia, serif' }}
                     className='font-bold text-[#d8400f] text-center text-5xl md:text-[72px] mb-8 md:mb-12'
                 >
-                    You're invited!
+                    {t[lang].invited}
                 </motion.h2>
 
                 <motion.div
@@ -36,19 +38,9 @@ export function SaveTheDate() {
                     style={{ fontFamily: 'Times New Roman, Times, serif' }}
                     className='text-[#0d0d0d] text-[22px] space-y-6 md:space-y-8 text-center md:text-left'
                 >
-                    <p>
-                        Join us on Saturday, 29th of August as we turn 40 and
-                        get married in the hills of Abruzzo. A day of
-                        celebration with the people we love most.{' '}
-                    </p>
+                    <p>{t[lang].invitedBody1}</p>
+                    <p>{t[lang].invitedBody2}</p>
 
-                    <p>
-                        Bring your family — kids are more than welcome. Expect
-                        plenty of food, music, and dancing throughout the day
-                        and into the evening.
-                    </p>
-
-                    {/* RSVP button */}
                     <div className='text-center' style={{ marginTop: '2rem' }}>
                         <RSVPButton />
                     </div>
@@ -67,7 +59,7 @@ export function SaveTheDate() {
                             fontWeight: 'bold',
                         }}
                     >
-                        Please RSVP by the 31st of May
+                        {t[lang].rsvpDeadline}
                     </motion.span>
                 </motion.div>
             </motion.div>

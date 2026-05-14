@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion'
 import imgEaf26Ddd2D3C455F936BF59A6A0D83441 from 'figma:asset/fbc77f4658200efd2d384f5c483254426dd6d7ad.png'
-import { PhotoDecoration } from './PhotoDecoration'
+import { useLang } from '../i18n/LangContext'
+import { t } from '../i18n/translations'
 
 export function Hero() {
+    const { lang } = useLang()
+
     return (
         <section className='relative min-h-[100vh] flex flex-col items-center justify-center px-4 py-12 md:py-20 pb-48 md:pb-96'>
             {/* Background Image */}
@@ -33,7 +36,7 @@ export function Hero() {
                     }}
                     className="font-['ABC_Favorit_Condensed_Unlicensed_Trial:Bold',sans-serif] text-[#f2ebd5] text-xl md:text-[32px] mb-8 md:mb-12 whitespace-nowrap"
                 >
-                    29 August 2026 — Abruzzo
+                    {t[lang].heroDate}
                 </motion.p>
 
                 <motion.h1

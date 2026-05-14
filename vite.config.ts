@@ -5,6 +5,7 @@
 
   export default defineConfig({
     plugins: [react()],
+    assetsInclude: ['**/*.pdf'],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {

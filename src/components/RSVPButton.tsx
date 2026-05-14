@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { RSVPModal } from './RSVPModal'
+import { useLang } from '../i18n/LangContext'
+import { t } from '../i18n/translations'
 
 export function RSVPButton() {
     const [isOpen, setIsOpen] = useState(false)
@@ -12,8 +14,10 @@ export function RSVPButton() {
                     style={{
                         fontFamily: 'Gyst, Georgia, serif',
                         cursor: 'pointer',
-                        transition: 'all var(--duration-base) var(--ease-out-quart)',
-                        animation: 'rsvp-pulse 2.5s var(--ease-in-out-quart) infinite',
+                        transition:
+                            'all var(--duration-base) var(--ease-out-quart)',
+                        animation:
+                            'rsvp-pulse 2.5s var(--ease-in-out-quart) infinite',
                     }}
                     className='mt-8 px-8 py-3 bg-[#d8400f] text-[#f2ebd5] font-bold text-[20px] hover:scale-105 hover:shadow-lg active:scale-95 hover:bg-[#b83510]'
                     onMouseEnter={(e) => {
@@ -29,14 +33,11 @@ export function RSVPButton() {
                         e.currentTarget.style.transform = 'scale(1.05)'
                     }}
                 >
-                    Click to RSVP
+                    {t[useLang().lang].rsvpButton}
                 </button>
             )}
 
-            <RSVPModal
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-            />
+            <RSVPModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 
             <style>{`
                 @keyframes rsvp-pulse {
