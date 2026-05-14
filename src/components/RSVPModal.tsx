@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { RSVPForm } from './RSVPForm'
-import { X } from 'lucide-react'
+import { useLang } from '../i18n/LangContext'
+import { t } from '../i18n/translations'
 
 interface RSVPModalProps {
     isOpen: boolean
@@ -25,7 +26,6 @@ export function RSVPModal({ isOpen, onClose }: RSVPModalProps) {
 
     const handleClose = () => {
         onClose()
-        // Reset submission result after animation completes
         setTimeout(() => setSubmissionResult(null), 300)
     }
 
@@ -123,6 +123,8 @@ function SuccessMessage({
     isAttending: boolean
     onClose: () => void
 }) {
+    const { lang } = useLang()
+
     return (
         <div
             style={{
@@ -157,7 +159,7 @@ function SuccessMessage({
                                 pointerEvents: 'none',
                             }}
                         >
-                            {['🎉', '✨', '💛', '🌟'][i % 4]}
+                            {['\u{1F389}', '✨', '\u{1F49B}', '\u{1F31F}'][i % 4]}
                         </motion.div>
                     ))}
                 </>
@@ -180,8 +182,8 @@ function SuccessMessage({
                 }}
             >
                 {isAttending
-                    ? "We can't wait to see you!"
-                    : "We're sorry not to celebrate with you."}
+                    ? t[lang].rsvpSuccessAttending
+                    : t[lang].rsvpSuccessNotAttending}
             </motion.h2>
 
             <div
@@ -200,10 +202,9 @@ function SuccessMessage({
                                 fontSize: '1.25rem',
                             }}
                         >
-                            Keep an eye out for an invite in the snail mail!
-                            <br></br>
-                            If you have any questions don't hesitate to contact
-                            us on our mobiles or email <br></br>
+                            {t[lang].rsvpSuccessAttendingBody.split('\n')[0]}
+                            <br />
+                            {t[lang].rsvpSuccessAttendingBody.split('\n')[1]}{' '}
                             <a
                                 href='mailto:wedding@daniele.is'
                                 style={{
@@ -222,11 +223,9 @@ function SuccessMessage({
                             >
                                 wedding@daniele.is
                             </a>
-                            <br></br>
-                            <br></br>
-                            In the next few weeks we will be creating WhatsApp
-                            Group that you can join with common questions and
-                            answers, travel tips and more.
+                            <br />
+                            <br />
+                            {t[lang].rsvpSuccessWhatsApp}
                         </p>
                     </>
                 ) : (
@@ -237,8 +236,7 @@ function SuccessMessage({
                                 fontSize: '1.25rem',
                             }}
                         >
-                            If you change your mind please let us know. We hope
-                            to see you in 2026.
+                            {t[lang].rsvpSuccessNotAttendingBody}
                         </p>
                         <p
                             style={{
@@ -246,8 +244,7 @@ function SuccessMessage({
                                 fontSize: '1.25rem',
                             }}
                         >
-                            If you have any questions don't hesitate to contact
-                            us on our mobiles or email{' '}
+                            {t[lang].rsvpSuccessContact}{' '}
                             <a
                                 href='mailto:wedding@daniele.is'
                                 style={{
@@ -291,7 +288,7 @@ function SuccessMessage({
                     (e.currentTarget.style.backgroundColor = '#d8400f')
                 }
             >
-                Close
+                {t[lang].rsvpClose}
             </button>
         </div>
     )

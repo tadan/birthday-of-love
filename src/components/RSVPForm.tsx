@@ -1,9 +1,7 @@
 import { useForm } from 'react-hook-form'
-import { Label } from './ui/label'
-import { Input } from './ui/input'
-import { RadioGroup, RadioGroupItem } from './ui/radio-group'
-import { Textarea } from './ui/textarea'
 import { useState } from 'react'
+import { useLang } from '../i18n/LangContext'
+import { t } from '../i18n/translations'
 
 interface RSVPFormData {
     name: string
@@ -28,6 +26,7 @@ interface RSVPFormProps {
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgknvop'
 
 export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
+    const { lang } = useLang()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [attending, setAttending] = useState<'yes' | 'no'>('yes')
@@ -35,7 +34,6 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm<RSVPFormData>({
         defaultValues: {
@@ -50,16 +48,14 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
         setError(null)
 
         try {
-            // Format email body
             const attendingText = attending === 'yes' ? 'Yes' : 'No'
-            let emailBody = `Attending: ${attendingText}\n\nName: ${data.name}\nSurname: ${data.surname}`
+            let emailBody = `Attending: ${attendingText}\n\nName: ${data.name}\nSurname: ${data.surname}\nLanguage: ${lang}`
 
             if (attending === 'yes') {
                 emailBody += `\n\nFood preference: ${
                     data.foodPreference || 'Not specified'
                 }`
 
-                // Add allergies/intolerances
                 const allergies = []
                 if (data.lactoseIntolerant) allergies.push('Lactose intolerant')
                 if (data.celiac) allergies.push('Celiac (gluten-free)')
@@ -79,7 +75,6 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                 emailBody += '\n\n(Sent regrets)'
             }
 
-            // Submit to Formspree
             const response = await fetch(FORMSPREE_ENDPOINT, {
                 method: 'POST',
                 headers: {
@@ -111,13 +106,10 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                 throw new Error('Failed to submit RSVP')
             }
 
-            // Success!
             onSubmit({ success: true, isAttending: attending === 'yes' })
         } catch (err) {
             console.error('RSVP submission error:', err)
-            setError(
-                'Unable to submit RSVP. Please email us directly at wedding@daniele.is',
-            )
+            setError(t[lang].rsvpSubmitError)
         } finally {
             setIsSubmitting(false)
         }
@@ -125,7 +117,6 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
 
     return (
         <div className='max-w-2xl mx-auto relative'>
-            {/* Close button */}
             <button
                 type='button'
                 onClick={onClose}
@@ -154,7 +145,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                     style={{ fontFamily: 'Gyst, Georgia, serif' }}
                     className='text-[#d8400f] text-4xl font-bold mt-12 mb-8'
                 >
-                    You're invited!
+                    {t[lang].rsvpFormTitle}
                 </h2>
 
                 {/* Name */}
@@ -169,13 +160,13 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                         }}
                         className='block text-left'
                     >
-                        Name*
+                        {t[lang].rsvpNameLabel}
                     </label>
                     <input
                         id='name'
                         type='text'
-                        placeholder='Giorgio'
-                        {...register('name', { required: 'Name is required' })}
+                        placeholder={t[lang].rsvpNamePlaceholder}
+                        {...register('name', { required: t[lang].rsvpNameRequired })}
                         style={{
                             backgroundColor: 'white',
                             paddingLeft: '1rem',
@@ -211,14 +202,14 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                             fontSize: '1.5rem',
                         }}
                     >
-                        Surname*
+                        {t[lang].rsvpSurnameLabel}
                     </label>
                     <input
                         id='surname'
                         type='text'
-                        placeholder='Moroder'
+                        placeholder={t[lang].rsvpSurnamePlaceholder}
                         {...register('surname', {
-                            required: 'Surname is required',
+                            required: t[lang].rsvpSurnameRequired,
                         })}
                         style={{
                             backgroundColor: 'white',
@@ -256,7 +247,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                         }}
                         className='block text-left text-black text-lg mb-3'
                     >
-                        Are you attending?
+                        {t[lang].rsvpAttendingLabel}
                     </label>
                     <div className='space-y-2'>
                         <div className='flex items-center'>
@@ -268,9 +259,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                 onChange={(e) =>
                                     setAttending(e.target.value as 'yes' | 'no')
                                 }
-                                style={{
-                                    accentColor: '#0d0d0d',
-                                }}
+                                style={{ accentColor: '#0d0d0d' }}
                                 disabled={isSubmitting}
                             />
                             <label
@@ -282,7 +271,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                 }}
                                 className='text-black text-base'
                             >
-                                Yes, can't wait!
+                                {t[lang].rsvpAttendingYes}
                             </label>
                         </div>
                         <div className='flex items-center'>
@@ -306,7 +295,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                 }}
                                 className='text-black text-base'
                             >
-                                Sorry, can't make it.
+                                {t[lang].rsvpAttendingNo}
                             </label>
                         </div>
                     </div>
@@ -328,14 +317,14 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                 }}
                                 className='block text-left text-black text-lg mb-2'
                             >
-                                Your address*
+                                {t[lang].rsvpAddressLabel}
                             </label>
                             <input
                                 id='address'
                                 type='text'
-                                placeholder='Add your address for receiving the invitation'
+                                placeholder={t[lang].rsvpAddressPlaceholder}
                                 {...register('address', {
-                                    required: 'Address is required',
+                                    required: t[lang].rsvpAddressRequired,
                                 })}
                                 style={{
                                     backgroundColor: 'white',
@@ -360,6 +349,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                 </p>
                             )}
                         </div>
+
                         {/* Food preference */}
                         <div>
                             <label
@@ -373,7 +363,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                 }}
                                 className='block text-left text-black text-lg mb-3'
                             >
-                                Food preference*
+                                {t[lang].rsvpFoodLabel}
                             </label>
                             <div className='space-y-2'>
                                 <div className='flex items-center'>
@@ -383,7 +373,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         value='vegetarian'
                                         {...register('foodPreference', {
                                             required: isAttending
-                                                ? 'Please select a food preference'
+                                                ? t[lang].rsvpFoodRequired
                                                 : false,
                                         })}
                                         style={{ accentColor: '#0d0d0d' }}
@@ -400,7 +390,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         }}
                                         className='text-black text-base'
                                     >
-                                        Vegetarian
+                                        {t[lang].rsvpFoodVegetarian}
                                     </label>
                                 </div>
                                 <div className='flex items-center gap-3'>
@@ -410,7 +400,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         value='pescatarian'
                                         {...register('foodPreference', {
                                             required: isAttending
-                                                ? 'Please select a food preference'
+                                                ? t[lang].rsvpFoodRequired
                                                 : false,
                                         })}
                                         style={{ accentColor: '#0d0d0d' }}
@@ -427,7 +417,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         }}
                                         className='text-black text-base'
                                     >
-                                        Pescatarian
+                                        {t[lang].rsvpFoodPescatarian}
                                     </label>
                                 </div>
                                 <div className='flex items-center gap-3'>
@@ -437,7 +427,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         value='no-restriction'
                                         {...register('foodPreference', {
                                             required: isAttending
-                                                ? 'Please select a food preference'
+                                                ? t[lang].rsvpFoodRequired
                                                 : false,
                                         })}
                                         style={{ accentColor: '#0d0d0d' }}
@@ -454,7 +444,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         }}
                                         className='text-black text-base'
                                     >
-                                        No dietary restriction
+                                        {t[lang].rsvpFoodNoRestriction}
                                     </label>
                                 </div>
                                 <div className='flex items-center gap-3'>
@@ -464,7 +454,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         value='vegan'
                                         {...register('foodPreference', {
                                             required: isAttending
-                                                ? 'Please select a food preference'
+                                                ? t[lang].rsvpFoodRequired
                                                 : false,
                                         })}
                                         style={{ accentColor: '#0d0d0d' }}
@@ -481,7 +471,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         }}
                                         className='text-black text-base'
                                     >
-                                        Vegan
+                                        {t[lang].rsvpFoodVegan}
                                     </label>
                                 </div>
                             </div>
@@ -499,7 +489,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                             )}
                         </div>
 
-                        {/* Common allergies/intolerances */}
+                        {/* Allergies/intolerances */}
                         <div>
                             <label
                                 style={{
@@ -511,7 +501,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                 }}
                                 className='block text-left text-black text-lg mb-3'
                             >
-                                Allergies/intolerances
+                                {t[lang].rsvpAllergiesLabel}
                             </label>
                             <div className='space-y-2'>
                                 <div className='flex items-center'>
@@ -533,7 +523,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         }}
                                         className='text-black text-base'
                                     >
-                                        Lactose intolerant
+                                        {t[lang].rsvpAllergyLactose}
                                     </label>
                                 </div>
                                 <div className='flex items-center'>
@@ -555,7 +545,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         }}
                                         className='text-black text-base'
                                     >
-                                        Celiac (gluten-free)
+                                        {t[lang].rsvpAllergyCeliac}
                                     </label>
                                 </div>
                                 <div className='flex items-center'>
@@ -577,7 +567,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         }}
                                         className='text-black text-base'
                                     >
-                                        Nut allergy
+                                        {t[lang].rsvpAllergyNut}
                                     </label>
                                 </div>
                                 <div className='flex items-start gap-2'>
@@ -589,12 +579,12 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         }}
                                         className='text-black text-base'
                                     >
-                                        Other:
+                                        {t[lang].rsvpAllergyOther}
                                     </span>
                                     <input
                                         id='otherAllergy'
                                         type='text'
-                                        placeholder='Please specify'
+                                        placeholder={t[lang].rsvpAllergyOtherPlaceholder}
                                         {...register('otherAllergy')}
                                         style={{
                                             backgroundColor: 'white',
@@ -623,7 +613,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                     fontSize: '1.5rem',
                                 }}
                             >
-                                Will you bring a guest?
+                                {t[lang].rsvpGuestsLabel}
                             </label>
                             <p
                                 style={{
@@ -633,13 +623,11 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                     marginBottom: '0.5rem',
                                 }}
                             >
-                                Please let us know who will attend with you and
-                                their dietary preferences if different from
-                                yours.
+                                {t[lang].rsvpGuestsDesc}
                             </p>
                             <textarea
                                 id='guests'
-                                placeholder='Full names of those attending with you'
+                                placeholder={t[lang].rsvpGuestsPlaceholder}
                                 {...register('guests')}
                                 style={{
                                     backgroundColor: 'white',
@@ -651,18 +639,6 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                 className='w-full bg-white text-base p-3 rounded min-h-[100px]'
                                 disabled={isSubmitting}
                             />
-                            {errors.guests && (
-                                <p
-                                    style={{
-                                        color: 'red',
-                                        marginTop: '0.5rem',
-                                        fontSize: '0.95rem',
-                                        textAlign: 'left',
-                                    }}
-                                >
-                                    {errors.guests.message}
-                                </p>
-                            )}
                         </div>
 
                         {/* Shuttle service */}
@@ -677,7 +653,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                 }}
                                 className='block text-left text-black text-lg mb-3'
                             >
-                                Shuttle service*
+                                {t[lang].rsvpShuttleLabel}
                             </label>
                             <p
                                 style={{
@@ -687,8 +663,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                     marginBottom: '0.5rem',
                                 }}
                             >
-                                Would you like to use the shuttle service from
-                                Pescara Centrale on the day of the event?
+                                {t[lang].rsvpShuttleDesc}
                             </p>
                             <div className='space-y-2'>
                                 <div className='flex items-center'>
@@ -698,12 +673,10 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         value='yes'
                                         {...register('shuttleService', {
                                             required: isAttending
-                                                ? 'Please select a shuttle option'
+                                                ? t[lang].rsvpShuttleRequired
                                                 : false,
                                         })}
-                                        style={{
-                                            accentColor: '#0d0d0d',
-                                        }}
+                                        style={{ accentColor: '#0d0d0d' }}
                                         disabled={isSubmitting}
                                     />
                                     <label
@@ -716,7 +689,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         }}
                                         className='text-black text-base'
                                     >
-                                        Yes, please reserve a spot
+                                        {t[lang].rsvpShuttleYes}
                                     </label>
                                 </div>
                                 <div className='flex items-center'>
@@ -726,7 +699,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         value='no'
                                         {...register('shuttleService', {
                                             required: isAttending
-                                                ? 'Please select a shuttle option'
+                                                ? t[lang].rsvpShuttleRequired
                                                 : false,
                                         })}
                                         style={{ accentColor: '#0d0d0d' }}
@@ -742,7 +715,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         }}
                                         className='text-black text-base'
                                     >
-                                        No, thank you!
+                                        {t[lang].rsvpShuttleNo}
                                     </label>
                                 </div>
                                 <div className='flex items-center'>
@@ -752,7 +725,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         value='undecided'
                                         {...register('shuttleService', {
                                             required: isAttending
-                                                ? 'Please select a shuttle option'
+                                                ? t[lang].rsvpShuttleRequired
                                                 : false,
                                         })}
                                         style={{ accentColor: '#0d0d0d' }}
@@ -768,8 +741,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                         }}
                                         className='text-black text-base'
                                     >
-                                        Not sure yet, will confirm closer to the
-                                        date
+                                        {t[lang].rsvpShuttleUndecided}
                                     </label>
                                 </div>
                             </div>
@@ -787,7 +759,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                             )}
                         </div>
 
-                        {/* Anything else we should know? */}
+                        {/* Notes */}
                         <div>
                             <label
                                 htmlFor='notes'
@@ -799,11 +771,11 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                                     marginBottom: '0.5rem',
                                 }}
                             >
-                                Anything else we should know?
+                                {t[lang].rsvpNotesLabel}
                             </label>
                             <textarea
                                 id='notes'
-                                placeholder='Anything else you want to tell us...'
+                                placeholder={t[lang].rsvpNotesPlaceholder}
                                 {...register('notes')}
                                 style={{
                                     backgroundColor: 'white',
@@ -853,7 +825,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                     }
                     className='w-full py-3 bg-[#d8400f] text-white font-bold text-xl hover:bg-[#b83510] transition-colors disabled:opacity-50'
                 >
-                    {isSubmitting ? 'Submitting...' : 'Submit'}
+                    {isSubmitting ? t[lang].rsvpSubmitting : t[lang].rsvpSubmit}
                 </button>
 
                 {/* Submit later link */}
@@ -883,7 +855,7 @@ export function RSVPForm({ onSubmit, onClose }: RSVPFormProps) {
                             (e.currentTarget.style.textDecoration = 'underline')
                         }
                     >
-                        I will submit it later
+                        {t[lang].rsvpSubmitLater}
                     </button>
                 </div>
             </form>
