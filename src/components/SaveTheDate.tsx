@@ -67,7 +67,7 @@ export function SaveTheDate() {
                             fontWeight: 'bold',
                         }}
                     >
-                        Please RSVP by the 31th of May
+                        Please RSVP by the 31st of May
                     </motion.span>
                 </motion.div>
             </motion.div>
